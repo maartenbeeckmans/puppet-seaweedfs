@@ -1,0 +1,13 @@
+[Unit]
+Description=SeaweedFS master
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Restart=on-failure
+ExecStart=<%= @bin_dir %>/<%= @bin_name %> -logdir=<%= @log_dir %> master -mdir=<%= @metadata_dir %> -port=<%= @port %> -ip=<%= @ipaddress %> -defaultReplication=<%= @replication %> -volumePreallocate
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

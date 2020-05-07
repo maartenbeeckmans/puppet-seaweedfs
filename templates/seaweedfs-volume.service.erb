@@ -1,0 +1,13 @@
+[Unit]
+Description=SeaweedFS volume
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Restart=on-failure
+ExecStart=<%= @bin_dir %>/<%= @bin_name %> -logdir=<%= @log_dir %> volume -dir=<%= @data_dir %> -ip=<%= @ipaddress %> -max=<%= @max_volumes %> -mserver=<%= @master_ip %>:<%= @master_port %> -port=<%= @port %> -dataCenter=<%= @datacenter %> -rack=<%= @rack %>
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

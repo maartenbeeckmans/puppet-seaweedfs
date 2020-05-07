@@ -1,1 +1,40 @@
 ---
+seaweedfs::archive_name: 'linux_amd64.tar.gz'
+seaweedfs::bin_name: 'weed'
+seaweedfs::bin_dir: '/usr/local/bin'
+seaweedfs::download_dir: '/tmp'
+seaweedfs::download_url_base: 'https://github.com/chrislusf/seaweedfs/releases/download'
+seaweedfs::group: 'seaweedfs'
+seaweedfs::install_method: 'archive'
+seaweedfs::manage_download_dir: false
+seaweedfs::manage_group: true
+seaweedfs::manage_user: true
+seaweedfs::master: false
+seaweedfs::package_ensure: 'present'
+seaweedfs::package_name: 'seaweedfs'
+seaweedfs::user: 'seaweedfs'
+seaweedfs::version: '1.77'
+# Master variables
+seaweedfs::master::log_dir: '/var/log/seaweedfs-master'
+seaweedfs::master::metadata_dir: '/var/lib/seaweedfs-master'
+seaweedfs::master::port: 9333
+seaweedfs::master::replication: '001'
+seaweedfs::master::service_ensure: 'running'
+seaweedfs::master::service_enable: true
+# Filer variables
+seaweedfs::filer::conf_dir: '/etc/seaweedfs'
+seaweedfs::filer::data_dir: '/var/lib/seaweedfs-filer'
+seaweedfs::filer::log_dir: '/var/log/seaweedfs-filer'
+seaweedfs::filer::port: 8888
+seaweedfs::filer::replication: '001'
+seaweedfs::filer::service_ensure: 'running'
+seaweedfs::filer::service_enable: true
+# Volume variables
+seaweedfs::volume::datacenter: 'dc1'
+seaweedfs::volume::data_dir: '/seaweedfs'
+seaweedfs::volume::log_dir: '/var/log/seaweedfs-volume'
+seaweedfs::volume::max_volumes: 7
+seaweedfs::volume::port: 8080
+seaweedfs::volume::rack: 'rack1'
+seaweedfs::volume::service_ensure: 'running'
+seaweedfs::volume::service_enable: true
