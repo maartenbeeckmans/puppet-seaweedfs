@@ -5,7 +5,7 @@ After=network-online.target
 
 [Service]
 Restart=on-failure
-ExecStart=<%= @bin_dir %>/<%= @bin_name %> -logdir=<%= @log_dir %> master -mdir=<%= @metadata_dir %> -port=<%= @port %> -ip=<%= @ipaddress %> -defaultReplication=<%= @replication %> -volumePreallocate
+ExecStart=<%= @bin_dir %>/<%= @bin_name %> -logdir=<%= @log_dir %> master -mdir=<%= @metadata_dir %> -port=<%= @port %> -ip=<%= @ipaddress %> -defaultReplication=<%= @replication %><% unless @peers.empty? -%> -peers=<%= @peers.join(',') %><% end -%> -volumePreallocate
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
 

@@ -3,6 +3,7 @@ class seaweedfs::master (
   Stdlib::Absolutepath       $metadata_dir,
   Integer                    $port,
   String                     $replication,
+  Array                      $peers,
   Enum['running', 'stopped'] $service_ensure,
   Boolean                    $service_enable,
   Stdlib::Absolutepath       $bin_dir         = $::seaweedfs::bin_dir,

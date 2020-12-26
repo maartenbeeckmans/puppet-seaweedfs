@@ -19,6 +19,7 @@ seaweedfs::master::log_dir: '/var/log/seaweedfs-master'
 seaweedfs::master::metadata_dir: '/var/lib/seaweedfs-master'
 seaweedfs::master::port: 9333
 seaweedfs::master::replication: '001'
+seaweedfs::master::peers: []
 seaweedfs::master::service_ensure: 'running'
 seaweedfs::master::service_enable: true
 # Filer variables
