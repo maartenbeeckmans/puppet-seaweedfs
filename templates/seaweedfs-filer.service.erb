@@ -4,8 +4,14 @@ Requires=network-online.target
 After=network-online.target
 
 [Service]
+User=<%= @user %>
+Group=<%= @group %>
 Restart=on-failure
-ExecStart=<%= @bin_dir %>/<%= @bin_name %> -logdir=<%= @log_dir %> filer -ip=<%= @ipaddress %> -port=<%= @port %> -master=<%= @master_ip %>:<%= @master_port %> -defaultReplicaPlacement=<%= @replication %>
+ExecStart=<%= @bin_dir %>/<%= @bin_name %> -logdir=<%= @log_dir %> filer \
+  -ip=<%= @ipaddress %> \
+  -port=<%= @port %> \
+  -master=<%= @master_ip %>:<%= @master_port %> \
+  -defaultReplicaPlacement=<%= @replication %>
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
 

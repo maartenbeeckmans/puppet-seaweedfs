@@ -1,12 +1,12 @@
-class seaweedfs::volume (
-  String                     $datacenter,
-  Stdlib::Absolutepath       $data_dir,
-  Stdlib::Absolutepath       $log_dir,
-  Integer                    $max_volumes,
-  Integer                    $port,
-  String                     $rack,
-  Enum['running', 'stopped'] $service_ensure,
-  Boolean                    $service_enable,
+define seaweedfs::volume (
+  String                     $datacenter      = 'dc1',
+  Stdlib::Absolutepath       $data_dir        = "/seaweedfs-${title}",
+  Stdlib::Absolutepath       $log_dir         = "/var/log/seaweedfs-volume-${title}",
+  Integer                    $max_volumes     = 8,
+  Integer                    $port            = 8080,
+  String                     $rack            = 'rack1',
+  Enum['running', 'stopped'] $service_ensure  = 'running',
+  Boolean                    $service_enable  = true,
   Stdlib::Absolutepath       $bin_dir         = $::seaweedfs::bin_dir,
   String                     $bin_name        = $::seaweedfs::bin_name,
   String                     $group           = $::seaweedfs::group,
@@ -21,12 +21,12 @@ class seaweedfs::volume (
     owner  => $user,
   })
 
-  ::systemd::unit_file{ 'seaweedfs-volume.service':
+  ::systemd::unit_file{ "seaweedfs-volume-${title}.service":
     content => template('seaweedfs/seaweedfs-volume.service.erb'),
-    notify  => Service['seaweedfs-volume'],
+    notify  => Service["seaweedfs-volume-${title}"],
   }
 
-  service { 'seaweedfs-volume':
+  service { "seaweedfs-volume-${title}":
     ensure => $service_ensure,
     enable => $service_enable,
   }
